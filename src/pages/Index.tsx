@@ -1,4 +1,4 @@
-import PetsPage from "./pets/PetsPage";
+import PetsPage from "./Home/Home";
 
 const Index = () => {
   return (

@@ -1,4 +1,4 @@
-const PetsPage = () => {
+const Cart = () => {
   return (
     <>
       <div></div>
@@ -6,4 +6,4 @@ const PetsPage = () => {
   );
 };
 
-export default PetsPage;
+export default Cart;

@@ -1,0 +1,26 @@
+.sectionTitle {
+  margin: 40px 0 20px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #4a6741;
+  position: relative;
+  padding-left: 15px;
+}
+
+.sectionTitle::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 5px;
+  background-color: #f39c12;
+  border-radius: 10px;
+}
+
+.petGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 30px;
+  margin-top: 20px;
+}

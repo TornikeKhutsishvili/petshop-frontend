@@ -1,3 +1,4 @@
+import type React from "react";
 import type { AppDispatch } from "../store";
 import {
   currencySelector,
@@ -7,7 +8,7 @@ import {
 import styles from "../styles/currency.module.css";
 import { useDispatch, useSelector } from "react-redux";
 
-const Currency = () => {
+const Currency: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const currency = useSelector(currencySelector);
 
@@ -26,10 +27,10 @@ const Currency = () => {
           value={currency}
         >
           <option value="usd">USD ($)</option>
+          <option value="gel">GEL (₾)</option>
           <option value="eur">EUR (€)</option>
           <option value="gbp">GBP (£)</option>
           <option value="jpy">JPY (¥)</option>
-          <option value="aud">AUD (A$)</option>
         </select>
       </div>
     </>

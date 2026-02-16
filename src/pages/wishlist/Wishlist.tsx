@@ -1,35 +1,45 @@
+import type React from "react";
 import Currency from "../../components/Currency";
 import styles from "../../styles/wishlist.module.css";
+import {
+  clearWishlist,
+  wishlistSelector,
+} from "../../store/wishlist/wishlist.slice";
+import { currencySelector } from "../../store/currency/currency.slice";
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch } from "../../store";
+import WishlistItem from "../../components/WishlistItem";
 
-const Wishlist = () => {
+const Wishlist: React.FC = () => {
+  const wishlist = useSelector(wishlistSelector);
+  const currency = useSelector(currencySelector);
+  const dispatch = useDispatch<AppDispatch>();
+
+  if (wishlist.length === 0) {
+    return (
+      <>
+        <Currency />
+        <h2 className={styles.sectionTitle}>Your Wishlist</h2>
+        <p>Your wishlist is empty</p>
+      </>
+    );
+  }
+
   return (
     <>
       <Currency />
-
       <h2 className={styles.sectionTitle}>Your Wishlist</h2>
 
-      {/* Your wishlist is empty */}
-
       <div className={styles.wishlistContainer}>
-        <div>
-          <div className={styles.wishlistItem}>
-            <div className={styles.wishlistItemImage}>
-              <img src="" alt="" />
-            </div>
-            <div className={styles.wishlistItemInfo}>
-              <h3 className={styles.wishlistItemName}></h3>
-              <p className={styles.wishlistItemPrice}></p>
-            </div>
-            <div className={styles.wishlistItemActions}>
-              <span></span>
-              <button type="button" className={styles.removeBtn}>
-                Remove
-              </button>
-            </div>
-          </div>
-        </div>
+        {wishlist.map((item) => (
+          <WishlistItem key={item.id} item={item} currency={currency} />
+        ))}
 
-        <button type="button" className={styles.clearAllBtn}>
+        <button
+          type="button"
+          className={styles.clearAllBtn}
+          onClick={() => dispatch(clearWishlist())}
+        >
           Clear All
         </button>
       </div>

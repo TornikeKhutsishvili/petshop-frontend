@@ -1,15 +1,22 @@
-import { useSelector } from "react-redux";
+import type React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Autoplay } from "swiper/modules";
 import styles from "../styles/slider.module.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { animalsListSelector } from "../store/animals/animals.slice";
+import { useEffect } from "react";
+import type { AppDispatch } from "../store";
+import { getAnimals } from "../store/animals/animals.thunks";
 
-const Carousel = () => {
+const Carousel: React.FC = () => {
   const pets = useSelector(animalsListSelector);
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(getAnimals());
+  }, [dispatch]);
 
   if (!pets.length) return null;
-
-  console.log(pets);
 
   return (
     <Swiper
@@ -17,7 +24,6 @@ const Carousel = () => {
       modules={[Autoplay]}
       autoplay={{ delay: 3000 }}
       slidesPerView={1}
-      spaceBetween={20}
       loop
     >
       {pets.map(({ id, image, name, description }) => (

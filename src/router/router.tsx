@@ -6,6 +6,7 @@ import Index from "../pages/Index.tsx";
 import Home from "../pages/Home/Home.tsx";
 import Wishlist from "../pages/wishlist/Wishlist.tsx";
 import Cart from "../pages/cart/Cart.tsx";
+import PetDetailsPage from "../pages/pet-details/PetDetailsPage.tsx";
 // Error Page
 import ErrorPage from "../pages/error-page/ErrorPage.tsx";
 
@@ -33,6 +34,10 @@ const router: RouteObject[] = [
       },
 
       // dynamic
+      {
+        element: <PetDetailsPage />,
+        path: "/pet-details/:id",
+      },
       {},
     ],
   },

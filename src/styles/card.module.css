@@ -9,15 +9,11 @@
   position: relative;
 }
 
-.petCardOutOfStock {
-  opacity: 0.7;
-}
-
 .outOfStockBadge {
   position: absolute;
   top: 10px;
   right: 10px;
-  background-color: var(--danger-color);
+  background-color: #e74c3c;
   color: white;
   padding: 5px 10px;
   border-radius: 4px;

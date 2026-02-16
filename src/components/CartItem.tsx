@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useCurrencyConverter } from "../hooks/useCurrencyConverter";
 import type { AppDispatch } from "../store";
 import { removeFromCart } from "../store/cart/cart.slice";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   item: {
@@ -17,6 +18,7 @@ interface Props {
 }
 
 const CartItem: React.FC<Props> = ({ item, currency }: Props) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
 
   const { converted, loading } = useCurrencyConverter(
@@ -44,7 +46,11 @@ const CartItem: React.FC<Props> = ({ item, currency }: Props) => {
       </div>
 
       <div className={styles.cartItemActions}>
-        <button type="button" className={styles.buyBtn}>
+        <button
+          type="button"
+          className={styles.buyBtn}
+          onClick={() => navigate("/purchase")}
+        >
           Buy Now
         </button>
 

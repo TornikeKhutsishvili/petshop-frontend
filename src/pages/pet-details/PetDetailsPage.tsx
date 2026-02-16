@@ -1,4 +1,3 @@
-// PetDetailsPage.tsx
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { animalsListSelector } from "../../store/animals/animals.slice";

@@ -24,6 +24,9 @@ const Cart: React.FC = () => {
 
   return (
     <>
+      <Currency />
+      <h2 className={styles.sectionTitle}>Your Cart</h2>
+
       <div className={styles.cartContainer}>
         {cart.map((item) => (
           <CartItem key={item.id} item={item} currency={currency} />

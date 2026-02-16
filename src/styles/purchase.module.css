@@ -1,0 +1,19 @@
+.purchaseContainer {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.purchaseContext {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.purchaseText {
+  font-size: 40px;
+  color: green;
+}

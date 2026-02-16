@@ -9,6 +9,7 @@ import Cart from "../pages/cart/Cart.tsx";
 import PetDetailsPage from "../pages/pet-details/PetDetailsPage.tsx";
 // Error Page
 import ErrorPage from "../pages/error-page/ErrorPage.tsx";
+import Purchase from "../pages/purchase/Purchase.tsx";
 
 // Routes
 const router: RouteObject[] = [
@@ -31,6 +32,10 @@ const router: RouteObject[] = [
       {
         element: <Cart />,
         path: "/cart",
+      },
+      {
+        element: <Purchase />,
+        path: "/purchase",
       },
 
       // dynamic

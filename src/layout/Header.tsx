@@ -10,36 +10,32 @@ const Header = () => {
       <header className={styles.header}>
         <div className={`${styles.headerContainer} ${styles.container}`}>
           <div className={styles.logo}>
-            <NavLink to="/" end>
-              <a className={styles.logoA}>PetShop</a>
+            <NavLink to="/" className={styles.logoA}>
+              PetShop
             </NavLink>
           </div>
           <nav>
             <ul className={styles.navUl}>
-              <NavLink to="/" end>
+              <NavLink to="/" end className={styles.navLiA}>
                 {({ isActive }) => (
-                  <li className={`${styles.navLi}, ${getLiClass(isActive)}`}>
-                    <a className={styles.navLiA}>Home</a>
+                  <li className={`${styles.navLi} ${getLiClass(isActive)}`}>
+                    Home
                   </li>
                 )}
               </NavLink>
-              <NavLink to="/wishlist">
+              <NavLink to="/wishlist" className={styles.navLiA}>
                 {({ isActive }) => (
-                  <li className={`${styles.navLi}, ${getLiClass(isActive)}`}>
-                    <a className={styles.navLiA}>
-                      Wishlist
-                      <span className={styles.count}></span>
-                    </a>
+                  <li className={`${styles.navLi} ${getLiClass(isActive)}`}>
+                    Wishlist
+                    <span className={styles.count}></span>
                   </li>
                 )}
               </NavLink>
-              <NavLink to="/cart">
+              <NavLink to="/cart" className={styles.navLiA}>
                 {({ isActive }) => (
-                  <li className={`${styles.navLi}, ${getLiClass(isActive)}`}>
-                    <a className={styles.navLiA}>
-                      Cart
-                      <span className={styles.count}></span>
-                    </a>
+                  <li className={`${styles.navLi} ${getLiClass(isActive)}`}>
+                    Cart
+                    <span className={styles.count}></span>
                   </li>
                 )}
               </NavLink>

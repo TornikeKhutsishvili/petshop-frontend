@@ -5,7 +5,9 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const getLiClass = (isActive: boolean) =>
-    isActive ? `${styles.navLi} ${styles.navLiAactive}` : styles.navLi;
+    isActive
+      ? `${styles.footerColumnLiA} ${styles.navLiAactive}`
+      : styles.footerColumnLiA;
 
   return (
     <>
@@ -23,32 +25,32 @@ const Footer = () => {
             <div className={styles.footerColumn}>
               <h3>Quick Links</h3>
               <ul className={styles.footerColumnUl}>
-                <NavLink to="/" end>
+                <NavLink to="/" end className={styles.footerColumnLiA}>
                   {({ isActive }) => (
                     <li
                       className={`${styles.footerColumnLi} ${getLiClass(isActive)}`}
                     >
-                      <a className={styles.footerColumnLiA}>Home</a>
+                      Home
                     </li>
                   )}
                 </NavLink>
 
-                <NavLink to="/wishlist">
+                <NavLink to="/wishlist" className={styles.footerColumnLiA}>
                   {({ isActive }) => (
                     <li
                       className={`${styles.footerColumnLi} ${getLiClass(isActive)}`}
                     >
-                      <a className={styles.footerColumnLiA}>Wishlist</a>
+                      Wishlist
                     </li>
                   )}
                 </NavLink>
 
-                <NavLink to="/cart">
+                <NavLink to="/cart" className={styles.footerColumnLiA}>
                   {({ isActive }) => (
                     <li
                       className={`${styles.footerColumnLi} ${getLiClass(isActive)}`}
                     >
-                      <a className={styles.footerColumnLiA}>Cart</a>
+                      Cart
                     </li>
                   )}
                 </NavLink>

@@ -34,13 +34,11 @@ const Header: React.FC = () => {
                 {({ isActive }) => (
                   <li className={`${styles.navLi} ${getLiClass(isActive)}`}>
                     Wishlist
-                    <span className={styles.count}>
-                      {wishlistCount.length > 0 ? (
-                        wishlistCount.length
-                      ) : (
-                        <span></span>
-                      )}
-                    </span>
+                    {wishlistCount.length > 0 && (
+                      <span className={styles.count}>
+                        {wishlistCount.length}
+                      </span>
+                    )}
                   </li>
                 )}
               </NavLink>
@@ -48,9 +46,9 @@ const Header: React.FC = () => {
                 {({ isActive }) => (
                   <li className={`${styles.navLi} ${getLiClass(isActive)}`}>
                     Cart
-                    <span className={styles.count}>
-                      {cartCount.length > 0 ? cartCount.length : <span></span>}
-                    </span>
+                    {cartCount.length > 0 && (
+                      <span className={styles.count}>{cartCount.length}</span>
+                    )}
                   </li>
                 )}
               </NavLink>

@@ -11,6 +11,7 @@ import {
   wishlistSelector,
 } from "../store/wishlist/wishlist.slice";
 import type { AppDispatch } from "../store";
+import { toastError, toastSuccess } from "../layout/Toast";
 
 interface CardProps {
   animal: animalsList;
@@ -35,13 +36,15 @@ const Card: React.FC<CardProps> = ({ animal }) => {
   );
 
   const handleAddToCart = () => {
-    if (!inStock) return alert("This item is out of stock!");
+    if (!inStock) return toastError("This item is out of stock");
     dispatch(addToCart(animal));
+    toastSuccess("Added to cart 🛒");
   };
 
   const handleAddToWishlist = () => {
     if (isInWishlist) return;
     dispatch(addToWishlist(animal));
+    toastSuccess("Added to wishlist ❤️");
   };
 
   return (

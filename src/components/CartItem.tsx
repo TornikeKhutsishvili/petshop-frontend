@@ -6,6 +6,7 @@ import type { AppDispatch } from "../store";
 import { removeFromCart } from "../store/cart/cart.slice";
 import { useNavigate } from "react-router-dom";
 import { incrementQuantity, decrementQuantity } from "../store/cart/cart.slice";
+import { toastSuccess } from "../layout/Toast";
 
 interface Props {
   item: {
@@ -25,6 +26,12 @@ const CartItem: React.FC<Props> = ({ item, currency }: Props) => {
   const buyHendler = () => {
     navigate("/purchase");
     dispatch(removeFromCart(item.id));
+    toastSuccess("Purchase completed successfully!");
+  };
+
+  const removeHendler = () => {
+    dispatch(removeFromCart(item.id));
+    toastSuccess("Item removed from cart 🗑️");
   };
 
   const totalPrice = item.price * item.quantity;
@@ -81,7 +88,7 @@ const CartItem: React.FC<Props> = ({ item, currency }: Props) => {
         <button
           type="button"
           className={styles.removeBtn}
-          onClick={() => dispatch(removeFromCart(item.id))}
+          onClick={() => removeHendler()}
         >
           Remove
         </button>

@@ -8,6 +8,7 @@ import {
   removeFromWishlist,
 } from "../store/wishlist/wishlist.slice";
 import { addToCart } from "../store/cart/cart.slice";
+import { toastSuccess } from "../layout/Toast";
 
 interface Props {
   item: {
@@ -26,6 +27,12 @@ const WishlistItem: React.FC<Props> = ({ item, currency }) => {
   const handleMoveToCart = () => {
     dispatch(addToCart(item));
     dispatch(moveToCart(item.id));
+    toastSuccess("Moved to cart 🛒");
+  };
+
+  const removeHendler = () => {
+    dispatch(removeFromWishlist(item.id));
+    toastSuccess("Item removed from wishlist ❤️");
   };
 
   const { converted, loading } = useCurrencyConverter(
@@ -58,7 +65,7 @@ const WishlistItem: React.FC<Props> = ({ item, currency }) => {
         <button
           type="button"
           className={styles.removeBtn}
-          onClick={() => dispatch(removeFromWishlist(item.id))}
+          onClick={() => removeHendler()}
         >
           Remove
         </button>

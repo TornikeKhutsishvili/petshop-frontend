@@ -12,6 +12,7 @@ import {
   wishlistSelector,
 } from "../store/wishlist/wishlist.slice";
 import Currency from "./Currency";
+import { toastError, toastSuccess } from "../layout/Toast";
 
 interface CardProps {
   animal: animalsList;
@@ -31,13 +32,15 @@ const PetDetails: React.FC<CardProps> = ({ animal }) => {
   );
 
   const handleAddToCart = () => {
-    if (!animal.inStock) return alert("This item is out of stock!");
+    if (!animal.inStock) return toastError("This item is out of stock");
     dispatch(addToCart(animal));
+    toastSuccess("Added to cart 🛒");
   };
 
   const handleAddToWishlist = () => {
     if (isInWishlist) return;
     dispatch(addToWishlist(animal));
+    toastSuccess("Added to wishlist ❤️");
   };
 
   return (
@@ -79,14 +82,14 @@ const PetDetails: React.FC<CardProps> = ({ animal }) => {
                   ? styles.addWishlistBtnActive
                   : styles.addWishlistBtn
               }`}
-              onClick={handleAddToWishlist}
+              onClick={() => handleAddToWishlist()}
             >
               Add to Wishlist
             </button>
             <button
               type="button"
               className={styles.addCartBtn}
-              onClick={handleAddToCart}
+              onClick={() => handleAddToCart()}
             >
               Add to Cart
             </button>

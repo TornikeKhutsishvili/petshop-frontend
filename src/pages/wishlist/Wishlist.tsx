@@ -9,11 +9,17 @@ import { currencySelector } from "../../store/currency/currency.slice";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch } from "../../store";
 import WishlistItem from "../../components/WishlistItem";
+import { toastSuccess } from "../../layout/Toast";
 
 const Wishlist: React.FC = () => {
   const wishlist = useSelector(wishlistSelector);
   const currency = useSelector(currencySelector);
   const dispatch = useDispatch<AppDispatch>();
+
+  const clearAllHendler = () => {
+    dispatch(clearWishlist());
+    toastSuccess("Wishlist cleared 🗑️");
+  };
 
   if (wishlist.length === 0) {
     return (
@@ -38,7 +44,7 @@ const Wishlist: React.FC = () => {
         <button
           type="button"
           className={styles.clearAllBtn}
-          onClick={() => dispatch(clearWishlist())}
+          onClick={() => clearAllHendler()}
         >
           Clear All
         </button>

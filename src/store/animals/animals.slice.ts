@@ -1,12 +1,7 @@
 import { createSelector, createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "../../store/index";
 import type { animalsList } from "../../interfaces/animals.interface";
-import {
-  getAnimals,
-  addAnimal,
-  updateAnimal,
-  deleteAnimal,
-} from "./animals.thunks";
+import { getAnimals } from "./animals.thunks";
 
 type TypeError = string | null;
 
@@ -38,47 +33,6 @@ const animalsSlice = createSlice({
         state.animalsList = action.payload;
       })
       .addCase(getAnimals.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload as string;
-      })
-
-      // ADD
-      .addCase(addAnimal.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(addAnimal.fulfilled, (state, action) => {
-        state.animalsList.push(action.payload);
-      })
-      .addCase(addAnimal.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload as string;
-      })
-
-      // UPDATE
-      .addCase(updateAnimal.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(updateAnimal.fulfilled, (state, action) => {
-        const index = state.animalsList.findIndex(
-          (u) => u.id === action.payload.id,
-        );
-        if (index !== -1) state.animalsList[index] = action.payload;
-      })
-      .addCase(updateAnimal.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload as string;
-      })
-
-      // DELETE
-      .addCase(deleteAnimal.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(deleteAnimal.fulfilled, (state, action) => {
-        state.animalsList = state.animalsList.filter(
-          (u) => u.id !== action.payload,
-        );
-      })
-      .addCase(deleteAnimal.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       });

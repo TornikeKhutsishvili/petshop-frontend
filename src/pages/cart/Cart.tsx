@@ -7,6 +7,7 @@ import { cartSelector, clearCart } from "../../store/cart/cart.slice";
 import { currencySelector } from "../../store/currency/currency.slice";
 import styles from "../../styles/cart.module.css";
 import type { AppDispatch } from "../../store";
+import { toastSuccess } from "../../layout/Toast";
 
 const Cart: React.FC = () => {
   const navigate = useNavigate();
@@ -17,6 +18,12 @@ const Cart: React.FC = () => {
   const buyAllHendler = () => {
     navigate("/purchase");
     dispatch(clearCart());
+    toastSuccess("Purchase completed successfully!");
+  };
+
+  const clearAllHendler = () => {
+    dispatch(clearCart());
+    toastSuccess("Cart cleared 🗑️");
   };
 
   if (cart.length === 0) {
@@ -39,14 +46,18 @@ const Cart: React.FC = () => {
           <CartItem key={item.id} item={item} currency={currency} />
         ))}
 
-        <button type="button" className={styles.buyBtn} onClick={buyAllHendler}>
+        <button
+          type="button"
+          className={styles.buyBtn}
+          onClick={() => buyAllHendler()}
+        >
           Buy All
         </button>
 
         <button
           type="button"
           className={styles.clearAllBtn}
-          onClick={() => dispatch(clearCart())}
+          onClick={() => clearAllHendler()}
         >
           Clear All
         </button>

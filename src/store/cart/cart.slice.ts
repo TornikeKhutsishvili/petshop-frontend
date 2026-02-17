@@ -10,20 +10,6 @@ interface CartState {
   items: CartItem[];
 }
 
-// const loadCartFromLocalStorage = (): CartItem[] => {
-//   try {
-//     const data = localStorage.getItem("cart");
-//     if (!data) return [];
-//     const parsed: animalsList[] = JSON.parse(data);
-//     return parsed.map((item) => ({
-//       ...item,
-//       // quantity: item.quantity ?? 1,
-//     }));
-//   } catch {
-//     return [];
-//   }
-// };
-
 const loadCartFromLocalStorage = (): CartItem[] => {
   try {
     const data = localStorage.getItem("cart");

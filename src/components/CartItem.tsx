@@ -21,6 +21,11 @@ const CartItem: React.FC<Props> = ({ item, currency }: Props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
 
+  const buyHendler = () => {
+    navigate("/purchase");
+    dispatch(removeFromCart(item.id));
+  };
+
   const { converted, loading } = useCurrencyConverter(
     item.price,
     "usd",
@@ -49,7 +54,7 @@ const CartItem: React.FC<Props> = ({ item, currency }: Props) => {
         <button
           type="button"
           className={styles.buyBtn}
-          onClick={() => navigate("/purchase")}
+          onClick={() => buyHendler()}
         >
           Buy Now
         </button>

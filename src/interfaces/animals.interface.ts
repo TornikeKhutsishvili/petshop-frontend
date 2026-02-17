@@ -4,9 +4,9 @@ export interface animalsList {
   species?: string;
   breed?: string;
   age?: number;
-  price: number;
-  image: string;
-  description: string;
+  price?: number;
+  image?: string;
+  description?: string;
   inStock?: number;
   popular?: boolean;
 }

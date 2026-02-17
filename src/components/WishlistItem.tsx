@@ -7,6 +7,7 @@ import {
   moveToCart,
   removeFromWishlist,
 } from "../store/wishlist/wishlist.slice";
+import { addToCart } from "../store/cart/cart.slice";
 
 interface Props {
   item: {
@@ -21,6 +22,11 @@ interface Props {
 
 const WishlistItem: React.FC<Props> = ({ item, currency }) => {
   const dispatch = useDispatch<AppDispatch>();
+
+  const handleMoveToCart = () => {
+    dispatch(addToCart(item));
+    dispatch(moveToCart(item.id));
+  };
 
   const { converted, loading } = useCurrencyConverter(
     item.price,
@@ -45,7 +51,7 @@ const WishlistItem: React.FC<Props> = ({ item, currency }) => {
         <button
           type="button"
           className={styles.moveToCartBtn}
-          onClick={() => dispatch(moveToCart(item.id))}
+          onClick={() => handleMoveToCart()}
         >
           Move to Cart
         </button>

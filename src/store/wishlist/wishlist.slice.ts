@@ -6,8 +6,21 @@ interface WishlistState {
   items: animalsList[];
 }
 
+const loadWishlistFromLocalStorage = (): animalsList[] => {
+  try {
+    const data = localStorage.getItem("wishlist");
+    return data ? JSON.parse(data) : [];
+  } catch {
+    return [];
+  }
+};
+
 const initialState: WishlistState = {
-  items: [],
+  items: loadWishlistFromLocalStorage(),
+};
+
+const saveWishlistToLocalStorage = (items: animalsList[]) => {
+  localStorage.setItem("wishlist", JSON.stringify(items));
 };
 
 const wishlistSlice = createSlice({
@@ -17,16 +30,20 @@ const wishlistSlice = createSlice({
     addToWishlist: (state, action: PayloadAction<animalsList>) => {
       if (!state.items.find((i) => i.id === action.payload.id)) {
         state.items.push(action.payload);
+        saveWishlistToLocalStorage(state.items);
       }
     },
     removeFromWishlist: (state, action: PayloadAction<number>) => {
       state.items = state.items.filter((i) => i.id !== action.payload);
+      saveWishlistToLocalStorage(state.items);
     },
     clearWishlist: (state) => {
       state.items = [];
+      saveWishlistToLocalStorage(state.items);
     },
     moveToCart: (state, action: PayloadAction<number>) => {
       state.items = state.items.filter((i) => i.id !== action.payload);
+      saveWishlistToLocalStorage(state.items);
     },
   },
 });

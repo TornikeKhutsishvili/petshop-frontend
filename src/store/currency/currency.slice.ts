@@ -11,8 +11,20 @@ interface ICurrencyState {
   currency: CurrencyType;
 }
 
+const loadCurrencyFromLocalStorage = (): CurrencyType => {
+  try {
+    const data = localStorage.getItem("currency");
+    if (data && ["usd", "gel", "eur", "gbp", "jpy"].includes(data)) {
+      return data as CurrencyType;
+    }
+    return "usd";
+  } catch {
+    return "usd";
+  }
+};
+
 const initialState: ICurrencyState = {
-  currency: "usd",
+  currency: loadCurrencyFromLocalStorage(),
 };
 
 const currencySlice = createSlice({
@@ -21,6 +33,7 @@ const currencySlice = createSlice({
   reducers: {
     setCurrency: (state, action: PayloadAction<CurrencyType>) => {
       state.currency = action.payload;
+      localStorage.setItem("currency", action.payload);
     },
   },
 });

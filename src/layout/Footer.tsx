@@ -1,7 +1,8 @@
+import type React from "react";
 import { NavLink } from "react-router-dom";
 import styles from "../styles/footer.module.css";
 
-const Footer = () => {
+const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   const getLiClass = (isActive: boolean) =>

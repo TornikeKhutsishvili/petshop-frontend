@@ -1,9 +1,16 @@
+import type React from "react";
 import { NavLink } from "react-router-dom";
 import styles from "../styles/header.module.css";
+import { useSelector } from "react-redux";
+import { wishlistSelector } from "../store/wishlist/wishlist.slice";
+import { cartSelector } from "../store/cart/cart.slice";
 
-const Header = () => {
+const Header: React.FC = () => {
   const getLiClass = (isActive: boolean) =>
     isActive ? `${styles.navLi} ${styles.navLiAactive}` : styles.navLi;
+
+  const wishlistCount = useSelector(wishlistSelector);
+  const cartCount = useSelector(cartSelector);
 
   return (
     <>
@@ -27,7 +34,13 @@ const Header = () => {
                 {({ isActive }) => (
                   <li className={`${styles.navLi} ${getLiClass(isActive)}`}>
                     Wishlist
-                    <span className={styles.count}></span>
+                    <span className={styles.count}>
+                      {wishlistCount.length > 0 ? (
+                        wishlistCount.length
+                      ) : (
+                        <span></span>
+                      )}
+                    </span>
                   </li>
                 )}
               </NavLink>
@@ -35,7 +48,9 @@ const Header = () => {
                 {({ isActive }) => (
                   <li className={`${styles.navLi} ${getLiClass(isActive)}`}>
                     Cart
-                    <span className={styles.count}></span>
+                    <span className={styles.count}>
+                      {cartCount.length > 0 ? cartCount.length : <span></span>}
+                    </span>
                   </li>
                 )}
               </NavLink>

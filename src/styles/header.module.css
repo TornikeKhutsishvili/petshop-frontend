@@ -53,13 +53,16 @@
 }
 
 .count {
-  display: none;
-  background-color: var(--secondary-color);
+  position: absolute;
+  top: -20px;
+  right: -15px;
+  background-color: #f39c12;
   color: white;
   width: 20px;
   height: 20px;
   border-radius: 50%;
   font-size: 12px;
+  display: flex;
   justify-content: center;
   align-items: center;
   margin-left: 5px;

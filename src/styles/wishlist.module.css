@@ -85,6 +85,21 @@
   gap: 10px;
 }
 
+.moveToCartBtn {
+  background-color: #4a6741;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.moveToCartBtn:hover {
+  background-color: #3b5330;
+}
+
 .removeBtn {
   background-color: white;
   color: #e74c3c;

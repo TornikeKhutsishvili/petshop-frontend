@@ -1,6 +1,7 @@
+import type React from "react";
 import styles from "../../styles/errorPage.module.css";
 
-const ErrorPage = () => {
+const ErrorPage: React.FC = () => {
   return (
     <>
       <section id="error-page" style={{ minHeight: "90vh" }}>

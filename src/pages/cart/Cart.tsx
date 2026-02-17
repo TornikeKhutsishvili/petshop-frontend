@@ -1,37 +1,64 @@
+import type React from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import Currency from "../../components/Currency";
+import CartItem from "../../components/CartItem";
+import { cartSelector, clearCart } from "../../store/cart/cart.slice";
+import { currencySelector } from "../../store/currency/currency.slice";
 import styles from "../../styles/cart.module.css";
+import type { AppDispatch } from "../../store";
+import { toastSuccess } from "../../layout/Toast";
 
-const Cart = () => {
+const Cart: React.FC = () => {
+  const navigate = useNavigate();
+  const cart = useSelector(cartSelector);
+  const currency = useSelector(currencySelector);
+  const dispatch = useDispatch<AppDispatch>();
+
+  const buyAllHendler = () => {
+    navigate("/purchase");
+    dispatch(clearCart());
+    toastSuccess("Purchase completed successfully!");
+  };
+
+  const clearAllHendler = () => {
+    dispatch(clearCart());
+    toastSuccess("Cart cleared 🗑️");
+  };
+
+  if (cart.length === 0) {
+    return (
+      <>
+        <Currency />
+        <h2 className={styles.sectionTitle}>Your Cart</h2>
+        <p>Your cart is empty 🛒</p>
+      </>
+    );
+  }
+
   return (
     <>
       <Currency />
-
       <h2 className={styles.sectionTitle}>Your Cart</h2>
 
-      {/* Your cart is empty */}
-
       <div className={styles.cartContainer}>
-        <div>
-          <div className={styles.cartItem}>
-            <div className={styles.cartItemImage}>
-              <img src="" alt="" />
-            </div>
-            <div className={styles.cartItemInfo}>
-              <h3 className={styles.cartItemName}></h3>
-              <p className={styles.cartItemPrice}></p>
-            </div>
-            <div className={styles.cartItemActions}>
-              <button type="button" className={styles.buyBtn}>
-                Buy Now
-              </button>
-              <button type="button" className={styles.removeBtn}>
-                Remove
-              </button>
-            </div>
-          </div>
-        </div>
+        {cart.map((item) => (
+          <CartItem key={item.id} item={item} currency={currency} />
+        ))}
 
-        <button type="button" className={styles.clearAllBtn}>
+        <button
+          type="button"
+          className={styles.buyBtn}
+          onClick={() => buyAllHendler()}
+        >
+          Buy All
+        </button>
+
+        <button
+          type="button"
+          className={styles.clearAllBtn}
+          onClick={() => clearAllHendler()}
+        >
           Clear All
         </button>
       </div>

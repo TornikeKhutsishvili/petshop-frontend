@@ -1,0 +1,104 @@
+.petDetails {
+  display: flex;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.petImage {
+  flex: 1;
+  max-width: 500px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.petImage img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.petInfo {
+  flex: 1;
+}
+
+.petName {
+  font-size: 32px;
+  font-weight: 600;
+  color: #4a6741;
+  margin-bottom: 15px;
+}
+
+.petDescription {
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.petSpecs {
+  margin-bottom: 30px;
+}
+
+.petSpecsItem {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.petSpecsLabel {
+  font-weight: 600;
+  min-width: 120px;
+}
+
+.petDetailPrice {
+  font-size: 24px;
+  font-weight: 600;
+  color: #f39c12;
+  margin-bottom: 20px;
+}
+
+.petActions {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.addWishlistBtn {
+  background-color: white;
+  color: #e74c3c;
+  border: 1px solid #e74c3c;
+  padding: 12px 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  font-size: 16px;
+}
+
+.addWishlistBtnActive {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+}
+
+.addWishlistBtn:hover {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.addCartBtn {
+  background-color: #4a6741;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  font-size: 16px;
+}
+
+.addCartBtn:hover {
+  background-color: #3b5332;
+}
+
+.addCartBtn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

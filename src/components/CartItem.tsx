@@ -5,6 +5,7 @@ import { useCurrencyConverter } from "../hooks/useCurrencyConverter";
 import type { AppDispatch } from "../store";
 import { removeFromCart } from "../store/cart/cart.slice";
 import { useNavigate } from "react-router-dom";
+import { incrementQuantity, decrementQuantity } from "../store/cart/cart.slice";
 
 interface Props {
   item: {
@@ -26,8 +27,10 @@ const CartItem: React.FC<Props> = ({ item, currency }: Props) => {
     dispatch(removeFromCart(item.id));
   };
 
+  const totalPrice = item.price * item.quantity;
+
   const { converted, loading } = useCurrencyConverter(
-    item.price,
+    totalPrice,
     "usd",
     currency,
   );
@@ -46,8 +49,24 @@ const CartItem: React.FC<Props> = ({ item, currency }: Props) => {
             ? "Loading..."
             : `${converted.toFixed(0)} ${currency.toUpperCase()}`}
         </p>
+      </div>
 
-        <p>Quantity: {item.quantity}</p>
+      <div className={styles.quantityControls}>
+        <button
+          type="button"
+          onClick={() => dispatch(decrementQuantity(item.id))}
+        >
+          −
+        </button>
+
+        <span>{item.quantity}</span>
+
+        <button
+          type="button"
+          onClick={() => dispatch(incrementQuantity(item.id))}
+        >
+          +
+        </button>
       </div>
 
       <div className={styles.cartItemActions}>

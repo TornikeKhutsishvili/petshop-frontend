@@ -52,6 +52,23 @@ const cartSlice = createSlice({
       if (item) item.quantity = action.payload.quantity;
       saveCartToLocalStorage(state.items);
     },
+    incrementQuantity: (state, action: PayloadAction<number>) => {
+      const item = state.items.find((i: CartItem) => i.id === action.payload);
+      if (item) {
+        item.quantity += 1;
+      }
+      saveCartToLocalStorage(state.items);
+    },
+    decrementQuantity: (state, action: PayloadAction<number>) => {
+      const item = state.items.find((i: CartItem) => i.id === action.payload);
+
+      if (!item) return;
+
+      if (item.quantity > 1) {
+        item.quantity -= 1;
+        saveCartToLocalStorage(state.items);
+      }
+    },
     clearCart: (state) => {
       state.items = [];
       saveCartToLocalStorage(state.items);
@@ -59,7 +76,13 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, removeFromCart, changeQuantity, clearCart } =
-  cartSlice.actions;
+export const {
+  addToCart,
+  removeFromCart,
+  changeQuantity,
+  clearCart,
+  incrementQuantity,
+  decrementQuantity,
+} = cartSlice.actions;
 export default cartSlice.reducer;
 export const cartSelector = (state: RootState) => state.cart.items;

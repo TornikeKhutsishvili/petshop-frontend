@@ -5,8 +5,11 @@ import type { animalsList } from "../interfaces/animals.interface";
 import { useCurrencyConverter } from "../hooks/useCurrencyConverter";
 import { currencySelector } from "../store/currency/currency.slice";
 import { useNavigate } from "react-router-dom";
-import { addToCart } from "../store/cart/cart.slice";
-import { addToWishlist } from "../store/wishlist/wishlist.slice";
+import { addToCart, cartSelector } from "../store/cart/cart.slice";
+import {
+  addToWishlist,
+  wishlistSelector,
+} from "../store/wishlist/wishlist.slice";
 import type { AppDispatch } from "../store";
 
 interface CardProps {
@@ -19,6 +22,11 @@ const Card: React.FC<CardProps> = ({ animal }) => {
   // const { price } = animal;
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
+  const wishlist = useSelector(wishlistSelector);
+  const cart = useSelector(cartSelector);
+
+  const isInWishlist = wishlist.some((item) => item.id === animal.id);
+  const isInCart = cart.some((item) => item.id === animal.id);
 
   const { converted, loading } = useCurrencyConverter(
     animal.price,
@@ -32,6 +40,7 @@ const Card: React.FC<CardProps> = ({ animal }) => {
   };
 
   const handleAddToWishlist = () => {
+    if (isInWishlist) return;
     dispatch(addToWishlist(animal));
   };
 
@@ -64,7 +73,9 @@ const Card: React.FC<CardProps> = ({ animal }) => {
             <div>
               <button
                 type="button"
-                className={styles.wishlistBtn}
+                className={`${styles.wishlistBtn} ${
+                  isInWishlist ? styles.wishlistBtnActive : styles.wishlistBtn
+                }`}
                 title="wishlist"
                 onClick={handleAddToWishlist}
               >
@@ -72,7 +83,9 @@ const Card: React.FC<CardProps> = ({ animal }) => {
               </button>
               <button
                 type="button"
-                className={styles.cartBtn}
+                className={`${styles.cartBtn} ${
+                  isInCart ? styles.cartBtnActive : styles.cartBtn
+                }`}
                 title="cart"
                 onClick={handleAddToCart}
               >

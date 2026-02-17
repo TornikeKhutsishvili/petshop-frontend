@@ -4,7 +4,7 @@ export interface animalsList {
   species?: string;
   breed?: string;
   age?: number;
-  price?: number;
+  price: number;
   image?: string;
   description?: string;
   inStock?: number;

@@ -12,13 +12,13 @@ const PetDetailsPage = () => {
   const animals = useSelector(animalsListSelector);
 
   useEffect(() => {
-    if (animals.length === 0) dispatch(getAnimals());
-  }, [dispatch, animals.length]);
+    dispatch(getAnimals());
+  }, [dispatch]);
 
-  const animal = useMemo(
-    () => animals.find((a) => a.id === Number(id)),
-    [animals, id],
-  );
+  const animal = useMemo(() => {
+    if (!id) return null;
+    return animals.find((a) => String(a.id) === id);
+  }, [animals, id]);
 
   if (!animal) return <div>Loading...</div>;
 

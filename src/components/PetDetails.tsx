@@ -7,7 +7,10 @@ import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch } from "../store";
 import { useCurrencyConverter } from "../hooks/useCurrencyConverter";
 import { addToCart } from "../store/cart/cart.slice";
-import { addToWishlist } from "../store/wishlist/wishlist.slice";
+import {
+  addToWishlist,
+  wishlistSelector,
+} from "../store/wishlist/wishlist.slice";
 import Currency from "./Currency";
 
 interface CardProps {
@@ -17,6 +20,9 @@ interface CardProps {
 const PetDetails: React.FC<CardProps> = ({ animal }) => {
   const currency = useSelector(currencySelector);
   const dispatch = useDispatch<AppDispatch>();
+  const wishlist = useSelector(wishlistSelector);
+
+  const isInWishlist = wishlist.some((item) => item.id === animal.id);
 
   const { converted, loading } = useCurrencyConverter(
     animal.price,
@@ -30,6 +36,7 @@ const PetDetails: React.FC<CardProps> = ({ animal }) => {
   };
 
   const handleAddToWishlist = () => {
+    if (isInWishlist) return;
     dispatch(addToWishlist(animal));
   };
 
@@ -67,7 +74,11 @@ const PetDetails: React.FC<CardProps> = ({ animal }) => {
           <div className={styles.petActions}>
             <button
               type="button"
-              className={styles.addWishlistBtn}
+              className={`${styles.addWishlistBtn} ${
+                isInWishlist
+                  ? styles.addWishlistBtnActive
+                  : styles.addWishlistBtn
+              }`}
               onClick={handleAddToWishlist}
             >
               Add to Wishlist

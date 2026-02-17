@@ -71,6 +71,12 @@
   font-size: 16px;
 }
 
+.addWishlistBtnActive {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+}
+
 .addWishlistBtn:hover {
   background-color: #e74c3c;
   color: white;

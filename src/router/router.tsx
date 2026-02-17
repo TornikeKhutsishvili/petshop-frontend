@@ -43,7 +43,6 @@ const router: RouteObject[] = [
         element: <PetDetailsPage />,
         path: "/pet-details/:id",
       },
-      {},
     ],
   },
 
